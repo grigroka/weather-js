@@ -1,6 +1,10 @@
 'use strict';
+// Init storage
+const storage = new Storage();
+// Get stored location data
+const weatherLocation = storage.getLocationData();
 // Init weather object
-const weather = new Weather('London', 'UK');
+const weather = new Weather(weatherLocation.city, weatherLocation.countryCode);
 // Init UI
 const ui = new UI();
 // Get weather on DOM load
@@ -9,7 +13,10 @@ document.addEventListener('DOMContentLoaded', getWeather);
 document.querySelector('#w-change-btn').addEventListener('click', e => {
   const city = document.querySelector('#city').value;
   const countryCode = document.querySelector('#country-code').value;
-  weather.changeLocation('Kaunas', 'LT');
+  // Change location
+  weather.changeLocation(city, countryCode);
+  // Set location in LS
+  storage.setLocationData(city, countryCode);
   // Get and display weather
   getWeather();
   // Close modal
