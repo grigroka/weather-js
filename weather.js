@@ -16,4 +16,10 @@ class Weather {
     const responseData = await response.json();
     return responseData;
   }
+
+  // Change weather location
+  changeLocation(city, countryCode) {
+    this.city = city;
+    this.countryCode = countryCode;
+  }
 }
